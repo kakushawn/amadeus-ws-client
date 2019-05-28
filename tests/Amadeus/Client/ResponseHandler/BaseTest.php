@@ -838,7 +838,17 @@ class BaseTest extends BaseTestCase
         $this->assertEquals("Past date/time not allowed", $result->messages[0]->text);
     }
 
-
+    public function testCanHandleFareInstantTravelBoardSearchError()
+    {
+        $respHandler = new ResponseHandler\Base();
+        $sendResult = new SendResult();
+        $sendResult->responseXml = $this->getTestFile('dummyFareInstantTravelBoardSearchErrorResponse.txt');
+        $result = $respHandler->analyzeResponse($sendResult, 'Fare_InstantTravelBoardSearch');
+        $this->assertEquals(Result::STATUS_ERROR, $result->status);
+        $this->assertEquals(1, count($result->messages));
+        $this->assertEquals('920', $result->messages[0]->code);
+        $this->assertEquals("Past date/time not allowed", $result->messages[0]->text);
+    }
 
     public function testCanHandleFareMasterPricerCalendarError()
     {

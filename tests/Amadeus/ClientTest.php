@@ -1035,7 +1035,8 @@ class ClientTest extends BaseTestCase
         $messageResult = new Client\Result($mockedSendResult);
 
         $expectedMessageResult = new Client\Struct\MiniRule\GetFromPricingRec(
-            new Client\RequestOptions\MiniRuleGetFromPricingRecOptions([
+            new Client\RequestOptions\MiniRuleGetFromPricingRecOptions(
+                [
                     'pricings' => [
                         new Client\RequestOptions\MiniRule\Pricing([
                             'type' => Client\RequestOptions\MiniRule\Pricing::TYPE_OFFER,
@@ -2728,7 +2729,7 @@ class ClientTest extends BaseTestCase
                         'to' => 'LON',
                         'segments' => [
                             new Client\RequestOptions\Air\SellFromRecommendation\Segment([
-                                'departureDate' => \DateTime::createFromFormat('YmdHis','20170120000000', new \DateTimeZone('UTC')),
+                                'departureDate' => \DateTime::createFromFormat('YmdHis', '20170120000000', new \DateTimeZone('UTC')),
                                 'from' => 'BRU',
                                 'to' => 'LGW',
                                 'companyCode' => 'SN',
@@ -2782,7 +2783,7 @@ class ClientTest extends BaseTestCase
                         'to' => 'LON',
                         'segments' => [
                             new Client\RequestOptions\Air\SellFromRecommendation\Segment([
-                                'departureDate' => \DateTime::createFromFormat('YmdHis','20170120000000', new \DateTimeZone('UTC')),
+                                'departureDate' => \DateTime::createFromFormat('YmdHis', '20170120000000', new \DateTimeZone('UTC')),
                                 'from' => 'BRU',
                                 'to' => 'LGW',
                                 'companyCode' => 'SN',
@@ -2818,8 +2819,8 @@ class ClientTest extends BaseTestCase
                         'to' => 'BKK',
                         'segments' => [
                             new Client\RequestOptions\Air\SellFromRecommendation\Segment([
-                                'departureDate' => \DateTime::createFromFormat('YmdHis','20040308220000', new \DateTimeZone('UTC')),
-                                'arrivalDate' =>  \DateTime::createFromFormat('YmdHis','20040309141000', new \DateTimeZone('UTC')),
+                                'departureDate' => \DateTime::createFromFormat('YmdHis', '20040308220000', new \DateTimeZone('UTC')),
+                                'arrivalDate' =>  \DateTime::createFromFormat('YmdHis', '20040309141000', new \DateTimeZone('UTC')),
                                 'dateVariation' => 1,
                                 'from' => 'FRA',
                                 'to' => 'BKK',
@@ -2836,8 +2837,8 @@ class ClientTest extends BaseTestCase
                         'to' => 'BKK',
                         'segments' => [
                             new Client\RequestOptions\Air\SellFromRecommendation\Segment([
-                                'departureDate' => \DateTime::createFromFormat('YmdHis','20040308220000', new \DateTimeZone('UTC')),
-                                'arrivalDate' =>  \DateTime::createFromFormat('YmdHis','00000000141000', new \DateTimeZone('UTC')),
+                                'departureDate' => \DateTime::createFromFormat('YmdHis', '20040308220000', new \DateTimeZone('UTC')),
+                                'arrivalDate' =>  \DateTime::createFromFormat('YmdHis', '00000000141000', new \DateTimeZone('UTC')),
                                 'from' => 'FRA',
                                 'to' => 'BKK',
                                 'companyCode' => 'LH',
@@ -2892,8 +2893,8 @@ class ClientTest extends BaseTestCase
                         'to' => 'BKK',
                         'segments' => [
                             new Client\RequestOptions\Air\SellFromRecommendation\Segment([
-                                'departureDate' => \DateTime::createFromFormat('YmdHis','20040308220000', new \DateTimeZone('UTC')),
-                                'arrivalDate' =>  \DateTime::createFromFormat('YmdHis','20040309141000', new \DateTimeZone('UTC')),
+                                'departureDate' => \DateTime::createFromFormat('YmdHis', '20040308220000', new \DateTimeZone('UTC')),
+                                'arrivalDate' =>  \DateTime::createFromFormat('YmdHis', '20040309141000', new \DateTimeZone('UTC')),
                                 'dateVariation' => 1,
                                 'from' => 'FRA',
                                 'to' => 'BKK',
@@ -2910,8 +2911,8 @@ class ClientTest extends BaseTestCase
                         'to' => 'BKK',
                         'segments' => [
                             new Client\RequestOptions\Air\SellFromRecommendation\Segment([
-                                'departureDate' => \DateTime::createFromFormat('YmdHis','20040308220000', new \DateTimeZone('UTC')),
-                                'arrivalDate' =>  \DateTime::createFromFormat('YmdHis','00000000141000', new \DateTimeZone('UTC')),
+                                'departureDate' => \DateTime::createFromFormat('YmdHis', '20040308220000', new \DateTimeZone('UTC')),
+                                'arrivalDate' =>  \DateTime::createFromFormat('YmdHis', '00000000141000', new \DateTimeZone('UTC')),
                                 'from' => 'FRA',
                                 'to' => 'BKK',
                                 'companyCode' => 'LH',
@@ -3130,12 +3131,12 @@ class ClientTest extends BaseTestCase
         $this->assertEquals($messageResult, $response);
     }
 
-	public function testCanSendFareMasterPricerExpertSearch()
-	{
+    public function testCanSendFareMasterPricerExpertSearch()
+    {
         $mockSessionHandler = $this->getMockBuilder('Amadeus\Client\Session\Handler\HandlerInterface')->getMock();
 
         $mockedSendResult = new Client\Session\Handler\SendResult();
-		$mockedSendResult->responseXml = $this->getTestFile('fareMasterPricerExpertSearchReply-12.4.txt');
+        $mockedSendResult->responseXml = $this->getTestFile('fareMasterPricerExpertSearchReply-12.4.txt');
 
         $messageResult = new Client\Result($mockedSendResult);
 
@@ -3217,10 +3218,103 @@ class ClientTest extends BaseTestCase
                     Client\RequestOptions\FareMasterPricerExSearchOptions::FLIGHTTYPE_DIRECT
                 ]
             ])
-		);
+        );
 
         $this->assertEquals($messageResult, $response);
-	}
+    }
+
+    public function testCanSendFareInstantTravelBoardSearch()
+    {
+        $mockSessionHandler = $this->getMockBuilder('Amadeus\Client\Session\Handler\HandlerInterface')->getMock();
+
+        $mockedSendResult = new Client\Session\Handler\SendResult();
+        $mockedSendResult->responseXml = 'dummyfareinstanttravelboardsearchresponsemessage';
+
+        $messageResult = new Client\Result($mockedSendResult);
+
+        $expectedMessageResult = new Client\Struct\Fare\InstantTravelBoardSearch(
+            new Client\RequestOptions\FareInstantTbSearchOptions([
+                'nrOfRequestedResults' => 200,
+                'nrOfRequestedPassengers' => 1,
+                'passengers' => [
+                    new Client\RequestOptions\Fare\MPPassenger([
+                        'type' => Client\RequestOptions\Fare\MPPassenger::TYPE_ADULT,
+                        'count' => 1
+                    ])
+                ],
+                'itinerary' => [
+                    new Client\RequestOptions\Fare\MPItinerary([
+                        'departureLocation' => new Client\RequestOptions\Fare\MPLocation(['city' => 'BRU']),
+                        'arrivalLocation' => new Client\RequestOptions\Fare\MPLocation(['city' => 'LON']),
+                        'date' => new Client\RequestOptions\Fare\MPDate([
+                            'date' => new \DateTime('2017-01-15T00:00:00+0000', new \DateTimeZone('UTC'))
+                        ])
+                    ])
+                ],
+                'requestedFlightTypes' => [
+                    Client\RequestOptions\FareInstantTbSearchOptions::FLIGHTTYPE_DIRECT
+                ]
+            ])
+        );
+
+        $mockSessionHandler
+            ->expects($this->once())
+            ->method('sendMessage')
+            ->with('Fare_InstantTravelBoardSearch', $expectedMessageResult, ['endSession' => false, 'returnXml' => true])
+            ->will($this->returnValue($mockedSendResult));
+        $mockSessionHandler
+            ->expects($this->never())
+            ->method('getLastResponse');
+        $mockSessionHandler
+            ->expects($this->once())
+            ->method('getMessagesAndVersions')
+            ->will($this->returnValue(['Fare_InstantTravelBoardSearch' => ['version' => "12.3", 'wsdl' => 'dc22e4ee']]));
+
+        $mockResponseHandler = $this->getMockBuilder('Amadeus\Client\ResponseHandler\ResponseHandlerInterface')->getMock();
+
+        $mockResponseHandler
+            ->expects($this->once())
+            ->method('analyzeResponse')
+            ->with($mockedSendResult, 'Fare_InstantTravelBoardSearch')
+            ->will($this->returnValue($messageResult));
+
+        $par = new Params();
+        $par->sessionHandler = $mockSessionHandler;
+        $par->requestCreatorParams = new Params\RequestCreatorParams([
+            'receivedFrom' => 'some RF string',
+            'originatorOfficeId' => 'BRUXXXXXX'
+        ]);
+        $par->responseHandler = $mockResponseHandler;
+
+        $client = new Client($par);
+
+        $response = $client->fareInstantTravelBoardSearch(
+            new Client\RequestOptions\FareInstantTbSearchOptions([
+                'nrOfRequestedResults' => 200,
+                'nrOfRequestedPassengers' => 1,
+                'passengers' => [
+                    new Client\RequestOptions\Fare\MPPassenger([
+                        'type' => Client\RequestOptions\Fare\MPPassenger::TYPE_ADULT,
+                        'count' => 1
+                    ])
+                ],
+                'itinerary' => [
+                    new Client\RequestOptions\Fare\MPItinerary([
+                        'departureLocation' => new Client\RequestOptions\Fare\MPLocation(['city' => 'BRU']),
+                        'arrivalLocation' => new Client\RequestOptions\Fare\MPLocation(['city' => 'LON']),
+                        'date' => new Client\RequestOptions\Fare\MPDate([
+                            'date' => new \DateTime('2017-01-15T00:00:00+0000', new \DateTimeZone('UTC'))
+                        ])
+                    ])
+                ],
+                'requestedFlightTypes' => [
+                    Client\RequestOptions\FareInstantTbSearchOptions::FLIGHTTYPE_DIRECT
+                ]
+            ])
+        );
+
+        $this->assertEquals($messageResult, $response);
+    }
 
     public function testCanSendFareMasterPricerTravelBoardSearch()
     {
@@ -3426,8 +3520,8 @@ class ClientTest extends BaseTestCase
                 'resultAggregationOption' => Client\RequestOptions\PriceXplorerExtremeSearchOptions::AGGR_COUNTRY,
                 'origin' => 'BRU',
                 'destinations' => ['SYD', 'CBR'],
-                'earliestDepartureDate' => \DateTime::createFromFormat('Y-m-d','2016-08-25', new \DateTimeZone('UTC')),
-                'latestDepartureDate' => \DateTime::createFromFormat('Y-m-d','2016-09-28', new \DateTimeZone('UTC')),
+                'earliestDepartureDate' => \DateTime::createFromFormat('Y-m-d', '2016-08-25', new \DateTimeZone('UTC')),
+                'latestDepartureDate' => \DateTime::createFromFormat('Y-m-d', '2016-09-28', new \DateTimeZone('UTC')),
                 'searchOffice' => 'LONBG2222'
             ])
         );
@@ -3468,8 +3562,8 @@ class ClientTest extends BaseTestCase
                 'resultAggregationOption' => Client\RequestOptions\PriceXplorerExtremeSearchOptions::AGGR_COUNTRY,
                 'origin' => 'BRU',
                 'destinations' => ['SYD', 'CBR'],
-                'earliestDepartureDate' => \DateTime::createFromFormat('Y-m-d','2016-08-25', new \DateTimeZone('UTC')),
-                'latestDepartureDate' => \DateTime::createFromFormat('Y-m-d','2016-09-28', new \DateTimeZone('UTC')),
+                'earliestDepartureDate' => \DateTime::createFromFormat('Y-m-d', '2016-08-25', new \DateTimeZone('UTC')),
+                'latestDepartureDate' => \DateTime::createFromFormat('Y-m-d', '2016-09-28', new \DateTimeZone('UTC')),
                 'searchOffice' => 'LONBG2222'
             ])
         );
@@ -3909,7 +4003,8 @@ class ClientTest extends BaseTestCase
             ->expects($this->once())
             ->method('sendMessage')
             ->with('Fare_PricePNRWithBookingClass', $expectedMessageResult, ['endSession' => false, 'returnXml' => true])
-            ->will($this->returnValue($mockedSendResult));;
+            ->will($this->returnValue($mockedSendResult));
+        ;
         $mockSessionHandler
             ->expects($this->never())
             ->method('getLastResponse');
@@ -3956,7 +4051,8 @@ class ClientTest extends BaseTestCase
             ->expects($this->once())
             ->method('sendMessage')
             ->with('Fare_PricePNRWithLowerFares', $expectedMessageResult, ['endSession' => false, 'returnXml' => true])
-            ->will($this->returnValue($mockedSendResult));;
+            ->will($this->returnValue($mockedSendResult));
+        ;
         $mockSessionHandler
             ->expects($this->never())
             ->method('getLastResponse');
@@ -4057,7 +4153,8 @@ class ClientTest extends BaseTestCase
             ->expects($this->once())
             ->method('sendMessage')
             ->with('Fare_PricePNRWithLowestFare', $expectedMessageResult, ['endSession' => false, 'returnXml' => true])
-            ->will($this->returnValue($mockedSendResult));;
+            ->will($this->returnValue($mockedSendResult));
+        ;
         $mockSessionHandler
             ->expects($this->never())
             ->method('getLastResponse');
@@ -4157,7 +4254,8 @@ class ClientTest extends BaseTestCase
             ->expects($this->once())
             ->method('sendMessage')
             ->with('Fare_InformativePricingWithoutPNR', $expectedMessageResult, ['endSession' => false, 'returnXml' => true])
-            ->will($this->returnValue($mockedSendResult));;
+            ->will($this->returnValue($mockedSendResult));
+        ;
         $mockSessionHandler
             ->expects($this->never())
             ->method('getLastResponse');
@@ -4202,7 +4300,8 @@ class ClientTest extends BaseTestCase
             ->expects($this->once())
             ->method('sendMessage')
             ->with('Fare_InformativeBestPricingWithoutPNR', $expectedMessageResult, ['endSession' => false, 'returnXml' => true])
-            ->will($this->returnValue($mockedSendResult));;
+            ->will($this->returnValue($mockedSendResult));
+        ;
         $mockSessionHandler
             ->expects($this->never())
             ->method('getLastResponse');
@@ -4247,7 +4346,8 @@ class ClientTest extends BaseTestCase
             ->expects($this->once())
             ->method('sendMessage')
             ->with('Service_IntegratedPricing', $expectedMessageResult, ['endSession' => false, 'returnXml' => true])
-            ->will($this->returnValue($mockedSendResult));;
+            ->will($this->returnValue($mockedSendResult));
+        ;
         $mockSessionHandler
             ->expects($this->never())
             ->method('getLastResponse');
@@ -4292,7 +4392,8 @@ class ClientTest extends BaseTestCase
             ->expects($this->once())
             ->method('sendMessage')
             ->with('Service_IntegratedCatalogue', $expectedMessageResult, ['endSession' => false, 'returnXml' => true])
-            ->will($this->returnValue($mockedSendResult));;
+            ->will($this->returnValue($mockedSendResult));
+        ;
         $mockSessionHandler
             ->expects($this->never())
             ->method('getLastResponse');
@@ -4361,7 +4462,8 @@ class ClientTest extends BaseTestCase
             ->expects($this->once())
             ->method('sendMessage')
             ->with('FOP_CreateFormOfPayment', $expectedMessageResult, ['endSession' => false, 'returnXml' => true])
-            ->will($this->returnValue($mockedSendResult));;
+            ->will($this->returnValue($mockedSendResult));
+        ;
         $mockSessionHandler
             ->expects($this->never())
             ->method('getLastResponse');
@@ -4463,7 +4565,6 @@ class ClientTest extends BaseTestCase
 
     public function testCanDoAuthenticateCall()
     {
-
         $authParams = new Params\AuthParams([
             'officeId' => 'BRUXXXXXX',
             'originatorTypeCode' => 'U',

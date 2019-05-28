@@ -589,6 +589,24 @@ class Client extends Base
         return $this->callMessage($msgName, $options, $messageOptions);
     }
 
+    /**
+     * Fare_MasterPricerExpertSearch
+     *
+     * @param RequestOptions\FareInstantBoardSearchOptions $options
+     * @param array $messageOptions (OPTIONAL)
+     * @return Result
+     * @throws Client\InvalidMessageException
+     * @throws Client\RequestCreator\MessageVersionUnsupportedException
+     * @throws Exception
+     */
+    public function fareInstantTravelBoardSearch(
+        RequestOptions\FareInstantTbSearchOptions $options,
+        $messageOptions = []
+    ) {
+        $msgName = 'Fare_InstantTravelBoardSearch';
+
+        return $this->callMessage($msgName, $options, $messageOptions);
+    }
 
     /**
      * Fare_MasterPricerTravelBoardSearch

@@ -1,0 +1,15 @@
+<Fare_InstantTravelBoardSearchReply xmlns="http://xml.amadeus.com/FIFRTR_16_2_1A">
+    <errorMessage>
+        <applicationError>
+            <applicationErrorDetail>
+                <error>920</error>
+            </applicationErrorDetail>
+        </applicationError>
+        <errorMessageText>
+            <freeTextQualification>
+                <textSubjectQualifier>1</textSubjectQualifier>
+            </freeTextQualification>
+            <description>Past date/time not allowed</description>
+        </errorMessageText>
+    </errorMessage>
+</Fare_InstantTravelBoardSearchReply>
