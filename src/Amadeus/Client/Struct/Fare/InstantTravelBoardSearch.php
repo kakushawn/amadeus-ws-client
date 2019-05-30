@@ -23,7 +23,7 @@
 namespace Amadeus\Client\Struct\Fare;
 
 /**
- * Fare_MasterPricerExpertSearch message structure
+ * Fare_InstantTravelBoardSearch message structure
  *
  * @package Amadeus\Client\Struct\Fare
  * @author Dieter Devlieghere <dermikagh@gmail.com>

@@ -23,7 +23,7 @@
 namespace Amadeus\Client\RequestOptions;
 
 /**
- * Request Options for Fare_MasterPricerTravelboardSearch
+ * Request Options for FareInstantTbSearchOptions
  *
  * @package Amadeus\Client\RequestOptions
  * @author Dieter Devlieghere <dermikagh@gmail.com>

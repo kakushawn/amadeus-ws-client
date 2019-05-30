@@ -23,7 +23,7 @@
 namespace Amadeus\Client\ResponseHandler\Fare;
 
 /**
- * HandlerMasterPricerExpertSearch
+ * HandlerInstantTravelBoardSearch
  *
  * @package Amadeus\Client\ResponseHandler\Fare
  * @author Dieter Devlieghere <dermikagh@gmail.com>
